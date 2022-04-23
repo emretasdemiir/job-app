@@ -1,0 +1,13 @@
+.job-add .create-area {
+  display        : flex;
+  justify-content: space-between;
+}
+
+.job-add .create-area .add-text-input {
+  width: 1000px;
+}
+
+.job-add .create-area .create-button {
+  display   : flex;
+  align-self: flex-end;
+}

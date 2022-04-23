@@ -1,0 +1,13 @@
+.delete-modal {
+  display   : block;
+  text-align: center;
+
+  font-size  : 18px;
+  font-weight: bold;
+
+}
+
+.delete-modal .icon {
+  color    : #ff0000;
+  font-size: 40px;
+}
