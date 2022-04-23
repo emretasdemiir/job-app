@@ -4,6 +4,7 @@ import './JobAdd.css';
 
 import { Button, Input, Dropdown, Menu } from 'antd';
 import { PlusOutlined, DownOutlined } from '@ant-design/icons';
+import TableFilter from '../TableFilter/TableFilter';
 import TableData from '../TableData/TableData';
 
 function JobAdd() {
@@ -14,6 +15,9 @@ function JobAdd() {
   const [selectedValueKey, setSelectedValueKey] = useState(null)
   const [keyValue, setKeyValue] = useState(1)
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [filterInputText, setFilterInputText] = useState("")
+  const [selectedKeyForFilter, setSelectedKeyForFilter] = useState("0")
 
 
   const textInput = (e) => {
@@ -25,8 +29,11 @@ function JobAdd() {
   }
 
   let initialData = [...data]
+  let newFilteredData = [...filteredData]
 
-  const buttonClicked = (e) => {
+  const buttonClicked = () => {
+    let containsText
+
     const dataToPush =
     {
       key: String(keyValue),
@@ -34,11 +41,20 @@ function JobAdd() {
       priority: selectedValue,
       prioritykey: selectedValueKey
     }
-    console.log(data)
-
 
     initialData.push(dataToPush)
     initialData.sort((a, b) => a.prioritykey - b.prioritykey)
+
+    if (filterInputText !== "" || selectedKeyForFilter !== "0") {
+      containsText = newFilteredData.every(element => {
+        return (element.name.includes(inputText) || element.prioritykey === selectedKeyForFilter)
+      })
+
+      if (containsText) {
+        newFilteredData.push(dataToPush)
+        setFilteredData(newFilteredData)
+      }
+    }
 
     setData(initialData)
     setKeyValue(keyValue + 1)
@@ -83,14 +99,16 @@ function JobAdd() {
           </div>
         </div>
         <div className="create-button">
-          <Button type="primary" onClick={(e) => buttonClicked(e)} disabled={(inputText && selectedValue) ? false : true} icon={<PlusOutlined />}>
+          <Button type="primary" onClick={() => buttonClicked()} disabled={(inputText && selectedValue) ? false : true} icon={<PlusOutlined />}>
             Create
           </Button>
         </div>
       </div>
-
-      <TableData data={data} setData={setData} trigger={{}} />
-
+      <div className="table">
+        <div className='table-header'>Job List</div>
+        <TableFilter data={data} setData={setData} filteredData={filteredData} setFilteredData={setFilteredData} filterInputText={filterInputText} setFilterInputText={setFilterInputText} selectedKeyForFilter={selectedKeyForFilter} setSelectedKeyForFilter={setSelectedKeyForFilter} />
+        <TableData data={data} filteredData={filteredData} setData={setData} setFilteredData={setFilteredData} selectedKeyForFilter={selectedKeyForFilter} setSelectedKeyForFilter={setSelectedKeyForFilter} trigger={{}} />
+      </div>
     </div>
   );
 }

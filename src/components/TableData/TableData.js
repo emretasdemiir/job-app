@@ -7,17 +7,17 @@ import DeleteModal from '../DeleteModal/DeleteModal';
 import { Table, Tag, Space, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-function TableData({ data, setData, trigger }) {
+function TableData({ data, filteredData, setData, setFilteredData, selectedKeyForFilter, setSelectedKeyForFilter, trigger }) {
   const [editModalVisible, setEditModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [cellKeyForEdit, setCellKeyForEdit] = useState(null)
 
-  const handleEdit = (e, key) => {
+  const handleEdit = (key) => {
     setEditModalVisible(true)
     setCellKeyForEdit(key)
   }
 
-  const handleDelete = (e, key) => {
+  const handleDelete = (key) => {
     setDeleteModalVisible(true)
     setCellKeyForEdit(key)
   }
@@ -53,31 +53,36 @@ function TableData({ data, setData, trigger }) {
       key: 'action',
       render: (text, record) => (
         <Space size="small">
-          <Button onClick={(e) => handleEdit(e, text.key)} size="small"><EditOutlined /></Button>
-          <Button onClick={(e) => handleDelete(e, text.key)} size="small"><DeleteOutlined /></Button>
+          <Button onClick={() => handleEdit(text.key)} size="small"><EditOutlined /></Button>
+          <Button onClick={() => handleDelete(text.key)} size="small"><DeleteOutlined /></Button>
         </Space>
       ),
     },
   ]
 
   return (
-    <div className="table">
-      <div className='table-header'>Job List</div>
-      <Table dataSource={data} columns={columns} />
+    <div>
+      <Table dataSource={filteredData.length > 0 ? filteredData : filteredData === "" ? [] : data} columns={columns} />
 
       <EditModal
         data={data}
+        filteredData={filteredData}
         editModalVisible={editModalVisible}
         setEditModalVisible={setEditModalVisible}
         cellKeyForEdit={cellKeyForEdit}
-        setData={setData} />
+        setData={setData}
+        setFilteredData={setFilteredData}
+        selectedKeyForFilter={selectedKeyForFilter}
+        setSelectedKeyForFilter={setSelectedKeyForFilter} />
 
       <DeleteModal
         data={data}
+        filteredData={filteredData}
         deleteModalVisible={deleteModalVisible}
         setDeleteModalVisible={setDeleteModalVisible}
         cellKeyForEdit={cellKeyForEdit}
-        setData={setData} />
+        setData={setData}
+        setFilteredData={setFilteredData} />
     </div>
   );
 }

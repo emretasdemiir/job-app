@@ -1,13 +1,21 @@
 .job-add .create-area {
   display        : flex;
+  flex-direction : row;
   justify-content: space-between;
 }
 
 .job-add .create-area .add-text-input {
-  width: 1000px;
+  width       : 2000px;
+  margin-right: 10px;
 }
 
 .job-add .create-area .create-button {
-  display   : flex;
-  align-self: flex-end;
+  display    : flex;
+  align-self : flex-end;
+  margin-left: 10px;
+}
+
+.job-add .table .table-header {
+  font-size: 15px;
+  margin   : 40px 0 10px 0;
 }

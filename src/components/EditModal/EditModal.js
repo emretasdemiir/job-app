@@ -7,7 +7,7 @@ import { DownOutlined } from '@ant-design/icons';
 
 
 
-function EditModal({ data, editModalVisible, setEditModalVisible, cellKeyForEdit, setData }) {
+function EditModal({ data, filteredData, editModalVisible, setEditModalVisible, cellKeyForEdit, setData, setFilteredData, selectedKeyForFilter, setSelectedKeyForFilter }) {
 
   const [editModalName, setEditModalName] = useState(null)
   const [editModalDropdown, setEditModalDropdown] = useState(null)
@@ -16,8 +16,10 @@ function EditModal({ data, editModalVisible, setEditModalVisible, cellKeyForEdit
   const foundDataForEditModal = data.find(element => element.key === cellKeyForEdit)
   const foundDataForEditModalIndex = data.findIndex(element => element.key === cellKeyForEdit)
 
-  const handleSave = (e) => {
+  const handleSave = () => {
     const newData = [...data]
+    const newFilteredData = [...filteredData]
+    let foundDataForEditFilterIndex
 
     const newDataToPush = {
       key: foundDataForEditModal.key,
@@ -31,12 +33,29 @@ function EditModal({ data, editModalVisible, setEditModalVisible, cellKeyForEdit
     newData.push(newDataToPush)
     newData.sort((a, b) => a.prioritykey - b.prioritykey)
 
+    if (newFilteredData.length > 0) {
+      foundDataForEditFilterIndex = newFilteredData.findIndex(element => element.key === cellKeyForEdit)
+
+      newFilteredData.splice(foundDataForEditFilterIndex, 1)
+
+      if (editModalDropdownKey !== "0" && editModalDropdownKey === selectedKeyForFilter)
+        newFilteredData.push(newDataToPush)
+      newFilteredData.sort((a, b) => a.prioritykey - b.prioritykey || a.key - b.key)
+
+      if (newFilteredData.length > 0) {
+        setFilteredData(newFilteredData)
+      }
+      else {
+        setFilteredData("")
+      }
+    }
+
     setData(newData)
     setEditModalVisible(false)
 
   }
 
-  const handleCancel = (e) => {
+  const handleCancel = () => {
 
     setEditModalVisible(false)
   }
@@ -71,7 +90,7 @@ function EditModal({ data, editModalVisible, setEditModalVisible, cellKeyForEdit
 
   return (
     <div className="edit-modal">
-      <Modal title={"Job Edit"} centered visible={editModalVisible} onOk={(e) => handleSave(e)} onCancel={handleCancel}>
+      <Modal title={"Job Edit"} centered visible={editModalVisible} onOk={handleSave} onCancel={handleCancel}>
         <div style={{ marginBottom: "25px" }}>
           <div style={{ fontSize: "10px", color: "gray" }}>Job Name</div>
           <Input value={editModalName} disabled={true} />

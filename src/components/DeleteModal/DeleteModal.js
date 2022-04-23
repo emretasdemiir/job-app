@@ -5,22 +5,38 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 
 
-function DeleteModal({ data, deleteModalVisible, setDeleteModalVisible, cellKeyForEdit, setData }) {
+function DeleteModal({ data, filteredData, deleteModalVisible, setDeleteModalVisible, cellKeyForEdit, setData, setFilteredData }) {
 
-  const foundDataForEditModalIndex = data.findIndex(element => element.key === cellKeyForEdit)
+  const foundDataForDeleteModalIndex = data.findIndex(element => element.key === cellKeyForEdit)
 
-  const handleDelete = (e) => {
+  const handleDelete = () => {
     const newData = [...data]
+    const newFilteredData = [...filteredData]
+    let foundDataForDeleteFilterIndex
 
-    newData.splice(foundDataForEditModalIndex, 1)
+    newData.splice(foundDataForDeleteModalIndex, 1)
     newData.sort((a, b) => a.prioritykey - b.prioritykey)
+
+    if (newFilteredData.length > 0) {
+      foundDataForDeleteFilterIndex = newFilteredData.findIndex(element => element.key === cellKeyForEdit)
+
+      newFilteredData.splice(foundDataForDeleteFilterIndex, 1)
+      newFilteredData.sort((a, b) => a.prioritykey - b.prioritykey)
+
+      if (newFilteredData.length > 0) {
+        setFilteredData(newFilteredData)
+      }
+      else {
+        setFilteredData("")
+      }
+    }
 
     setData(newData)
     setDeleteModalVisible(false)
 
   }
 
-  const handleCancel = (e) => {
+  const handleCancel = () => {
     setDeleteModalVisible(false)
   }
 
@@ -33,7 +49,7 @@ function DeleteModal({ data, deleteModalVisible, setDeleteModalVisible, cellKeyF
         okText={"Yes"}
         cancelText={"No"}
         okType={"danger ghost"}
-        onOk={(e) => handleDelete(e)}
+        onOk={handleDelete}
         onCancel={handleCancel}
 
       >

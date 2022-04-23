@@ -1,0 +1,20 @@
+.job-filter {
+  margin-bottom: 20px;
+}
+
+.job-filter .filter-create-area {
+  width          : 100%;
+  display        : flex;
+  justify-content: space-between;
+}
+
+.job-filter .filter-create-area .filter-dropdown-area .filter-dropdown-button Button {
+  margin-left: 10px;
+  width      : 200px;
+}
+
+
+
+.job-filter .filter-create-area .filter-text-input {
+  width: 2000px;
+}

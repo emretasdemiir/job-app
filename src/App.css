@@ -1,10 +1,11 @@
 @import '~antd/dist/antd.min.css';
 
-.App {
-  margin: 30px;
+.App .App-content {
+  margin        : 30px;
+  padding-bottom: 40px;
 }
 
-.App .App-header .App-logo {
+.App .App-content .App-header .App-logo {
   width : 200px;
   height: 100px;
 }
