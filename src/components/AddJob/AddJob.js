@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './AddJob.css';
 
@@ -19,6 +19,22 @@ function AddJob() {
   const [filterInputText, setFilterInputText] = useState("")
   const [selectedKeyForFilter, setSelectedKeyForFilter] = useState("0")
 
+  useEffect(() => {
+    // In order to get datas from localStorage at the beginning
+    const tableDatasFromLocalStorage = JSON.parse(window.localStorage.getItem('tableDatas'));
+
+    if (tableDatasFromLocalStorage) {
+      setData(tableDatasFromLocalStorage)
+    }
+  }, [])
+
+  useEffect(() => {
+    // In order to set datas to localStorage for added values
+    if (data.length > 0) {
+      window.localStorage.setItem('tableDatas', JSON.stringify(data));
+    }
+
+  }, [data])
 
   const textInput = (e) => {
     setInputText(e.target.value)
@@ -28,11 +44,13 @@ function AddJob() {
     setSelectedValueKey(e.key)
   }
 
-  let initialData = [...data]
-  let newFilteredData = [...filteredData]
 
   const buttonClicked = () => {
+    let initialData = [...data]
+    let newFilteredData = [...filteredData]
     let containsText
+
+    // debugger
 
     const dataToPush =
     {
@@ -60,6 +78,10 @@ function AddJob() {
     setKeyValue(keyValue + 1)
     setInputText(null)
     setSelectedValue(null)
+
+    if (data.length === 0) {
+      window.localStorage.setItem('tableDatas', JSON.stringify(data));
+    }
   }
 
   const menu = (

@@ -49,14 +49,14 @@ function EditModal({ data, filteredData, editModalVisible, setEditModalVisible, 
         setFilteredData("")
       }
     }
-
     setData(newData)
     setEditModalVisible(false)
 
   }
 
   const handleCancel = () => {
-
+    setEditModalDropdown(foundDataForEditModal.priority)
+    setEditModalDropdownKey(foundDataForEditModal.prioritykey)
     setEditModalVisible(false)
   }
 
@@ -69,6 +69,7 @@ function EditModal({ data, filteredData, editModalVisible, setEditModalVisible, 
     if (foundDataForEditModal) {
       setEditModalName(foundDataForEditModal.name)
       setEditModalDropdown(foundDataForEditModal.priority)
+      setEditModalDropdownKey(foundDataForEditModal.prioritykey)
     }
   }, [cellKeyForEdit, data, foundDataForEditModal])
 
