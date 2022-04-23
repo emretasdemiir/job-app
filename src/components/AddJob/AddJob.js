@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import './JobAdd.css';
+import './AddJob.css';
 
 import { Button, Input, Dropdown, Menu } from 'antd';
 import { PlusOutlined, DownOutlined } from '@ant-design/icons';
 import TableFilter from '../TableFilter/TableFilter';
 import TableData from '../TableData/TableData';
 
-function JobAdd() {
+function AddJob() {
 
   // Global states
   const [inputText, setInputText] = useState(null)
@@ -79,7 +79,7 @@ function JobAdd() {
   );
 
   return (
-    <div className="job-add">
+    <div className="add-job">
       <span className='header-area' style={{ fontWeight: "bold" }}>Create New Job</span>
 
       <div className="create-area">
@@ -113,4 +113,4 @@ function JobAdd() {
   );
 }
 
-export default JobAdd;
+export default AddJob;

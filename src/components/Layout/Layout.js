@@ -1,11 +1,10 @@
 import './Layout.css';
-import TableData from '../TableData/TableData.js';
-import JobAdd from '../JobAdd/JobAdd';
+import AddJob from '../AddJob/AddJob';
 
 function Layout() {
   return (
     <div className="layout">
-      <JobAdd />
+      <AddJob />
     </div>
   );
 }
