@@ -8,3 +8,17 @@
   width : 200px;
   height: 100px;
 }
+
+.App .App-footer {
+  text-align      : center;
+  background-color: rgb(234, 229, 229);
+  position        : fixed;
+  bottom          : 0;
+  left            : 0;
+  width           : 100%;
+}
+
+.App .App-footer .footer-text {
+  margin-top   : 10px;
+  margin-bottom: 10px;
+}
