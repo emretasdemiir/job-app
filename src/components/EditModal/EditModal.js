@@ -7,7 +7,7 @@ import { DownOutlined } from '@ant-design/icons';
 
 
 
-function EditModal({ data, filteredData, editModalVisible, setEditModalVisible, cellKeyForEdit, setData, setFilteredData, selectedKeyForFilter, setSelectedKeyForFilter }) {
+function EditModal({ data, filteredData, editModalVisible, setEditModalVisible, cellKeyForEdit, setData, setFilteredData, selectedKeyForFilter }) {
 
   const [editModalName, setEditModalName] = useState(null)
   const [editModalDropdown, setEditModalDropdown] = useState(null)

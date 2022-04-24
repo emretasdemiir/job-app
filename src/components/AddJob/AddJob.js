@@ -128,8 +128,9 @@ function AddJob() {
       </div>
       <div className="table">
         <div className='table-header'>Job List</div>
-        <TableFilter data={data} setData={setData} filteredData={filteredData} setFilteredData={setFilteredData} filterInputText={filterInputText} setFilterInputText={setFilterInputText} selectedKeyForFilter={selectedKeyForFilter} setSelectedKeyForFilter={setSelectedKeyForFilter} />
-        <TableData data={data} filteredData={filteredData} setData={setData} setFilteredData={setFilteredData} selectedKeyForFilter={selectedKeyForFilter} setSelectedKeyForFilter={setSelectedKeyForFilter} trigger={{}} />
+        <TableFilter data={data} setFilteredData={setFilteredData} filterInputText={filterInputText} setFilterInputText={setFilterInputText} selectedKeyForFilter={selectedKeyForFilter} setSelectedKeyForFilter={setSelectedKeyForFilter} />
+
+        <TableData data={data} filteredData={filteredData} setData={setData} setFilteredData={setFilteredData} selectedKeyForFilter={selectedKeyForFilter} />
       </div>
     </div>
   );

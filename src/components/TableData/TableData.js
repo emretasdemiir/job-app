@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import './TableData.css'
 import EditModal from '../EditModal/EditModal';
@@ -7,7 +7,7 @@ import DeleteModal from '../DeleteModal/DeleteModal';
 import { Table, Tag, Space, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-function TableData({ data, filteredData, setData, setFilteredData, selectedKeyForFilter, setSelectedKeyForFilter, trigger }) {
+function TableData({ data, filteredData, setData, setFilteredData, selectedKeyForFilter }) {
   const [editModalVisible, setEditModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [cellKeyForEdit, setCellKeyForEdit] = useState(null)
@@ -21,12 +21,6 @@ function TableData({ data, filteredData, setData, setFilteredData, selectedKeyFo
     setDeleteModalVisible(true)
     setCellKeyForEdit(key)
   }
-
-  useEffect(() => {
-    if (data) {
-      setData(data)
-    }
-  }, [data, setData, trigger])
 
   const columns = [
     {
@@ -51,7 +45,7 @@ function TableData({ data, filteredData, setData, setFilteredData, selectedKeyFo
     {
       title: 'Action',
       key: 'action',
-      render: (text, record) => (
+      render: (text) => (
         <Space size="small">
           <Button onClick={() => handleEdit(text.key)} size="small"><EditOutlined /></Button>
           <Button onClick={() => handleDelete(text.key)} size="small"><DeleteOutlined /></Button>
@@ -72,8 +66,7 @@ function TableData({ data, filteredData, setData, setFilteredData, selectedKeyFo
         cellKeyForEdit={cellKeyForEdit}
         setData={setData}
         setFilteredData={setFilteredData}
-        selectedKeyForFilter={selectedKeyForFilter}
-        setSelectedKeyForFilter={setSelectedKeyForFilter} />
+        selectedKeyForFilter={selectedKeyForFilter} />
 
       <DeleteModal
         data={data}

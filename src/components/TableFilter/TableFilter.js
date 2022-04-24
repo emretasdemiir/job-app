@@ -5,7 +5,7 @@ import './TableFilter.css';
 import { Button, Input, Dropdown, Menu } from 'antd';
 import { SearchOutlined, DownOutlined } from '@ant-design/icons';
 
-function TableFilter({ data, setData, filteredData, setFilteredData, filterInputText, setFilterInputText, selectedKeyForFilter, setSelectedKeyForFilter }) {
+function TableFilter({ data, setFilteredData, filterInputText, setFilterInputText, selectedKeyForFilter, setSelectedKeyForFilter }) {
 
   // Global states
   const [selectedValueForFilter, setSelectedValueForFilter] = useState(null)
